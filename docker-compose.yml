@@ -1,0 +1,27 @@
+version: '3'
+services:
+  icecast:
+    image: infiniteproject/icecast:latest
+    restart: always
+    environment:
+      - ICECAST_SOURCE_PASSWORD=max
+      - ICECAST_ADMIN_PASSWORD=max
+      - ICECAST_RELAY_PASSWORD=max
+      - ICECAST_HOSTNAME=localhost
+      - ICECAST_ADMIN_USERNAME=max
+    volumes:
+      - '/etc/localtime:/etc/localtime:ro'
+    ports:
+      - '8000:8000'
+    networks:
+      - radio
+  liquidsoap:
+    build:
+      context: ./services/liquidsoap
+    volumes:
+      - './services/media:/media'
+    networks:
+      - radio
+networks:
+  radio:
+    driver: bridge
