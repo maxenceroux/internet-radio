@@ -1,7 +1,8 @@
 version: '3'
 services:
   icecast:
-    image: infiniteproject/icecast:latest
+    build:
+      context: ./services/icecast
     restart: always
     environment:
       - ICECAST_SOURCE_PASSWORD=max
